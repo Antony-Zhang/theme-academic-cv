@@ -23,3 +23,4 @@ mounts:
     target: layouts
   - source: assets
     target: assets
+proxy: https://goproxy.cn
