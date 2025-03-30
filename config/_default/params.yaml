@@ -6,7 +6,8 @@
 # Appearance
 appearance:
   mode: system
-  color: emerald
+  # color: emerald
+  color: sky  # sky / teal # blue, cyan, green, indigo, purple, red, rose, sky, teal, and zinc.
 
 # SEO
 marketing:
@@ -35,7 +36,7 @@ header:
     show_search: true
     show_theme_chooser: true
     logo:
-      text: "Your Name"
+      text: "Zhidong Zhang"
 
 # Site footer
 footer:

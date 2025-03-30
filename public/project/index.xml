@@ -5,35 +5,147 @@
     <link>http://localhost:1313/project/</link>
       <atom:link href="http://localhost:1313/project/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 26 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 27 Jul 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_645fa481986063ef.png</url>
+      <url>http://localhost:1313/media/icon_hu_414f99c91403bdb7.png</url>
       <title>Projects</title>
       <link>http://localhost:1313/project/</link>
     </image>
     
     <item>
-      <title>Pandas</title>
-      <link>http://localhost:1313/project/pandas/</link>
-      <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/pandas/</guid>
-      <description>&lt;p&gt;Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures.&lt;/p&gt;</description>
+      <title>The Working Memory Capacity of RNN</title>
+      <link>http://localhost:1313/project/working-memory-capacity-of-rnn/</link>
+      <pubDate>Sat, 27 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/project/working-memory-capacity-of-rnn/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Many thanks to my lovely group members! &amp;mdash;&amp;ndash; Meowdel, Vital - Aster Group 1&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Working memory&lt;/strong&gt; (WM) is a form of short-term memory which allows for temporary storage and manipulation of information for cognitive processing. Its mechanism is proposed to come from the persistent neural firing within its network. Such networks hence connect sensory and motor regions and are capable of maintaining representations of past inputs for later use. For a finite number of neurons and a finite number of representations there are theoretical limitations of information that can be encoded within the network.
+However, the amount of information encoded also depended on the network structure. Computational models could be used to investigate the WM network capacity, among which &lt;strong&gt;Recurrent Neural Networks&lt;/strong&gt; (RNNs) show significant capability in producing firing rates fluctuations for a longer magnitude on timescales than that of the membrane time constant of individual neurons. Thus, we developed a RNN-based WM model with parameters &lt;em&gt;simulating biological factors&lt;/em&gt; contributing to working memory, e.g. synaptic strength, connection sparsity, and number of neurons.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;RNN&#34;
+           src=&#34;http://localhost:1313/project/working-memory-capacity-of-rnn/RNN.svg&#34;
+           loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Variable&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Representation&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Number of neurons in &lt;em&gt;recurrent pool&lt;/em&gt; (default=1000)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;g&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Gain of synaptic weights in &lt;em&gt;recurrent pool&lt;/em&gt; (default=0.95)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;gIn&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Gain of synaptic weights in &lt;em&gt;input layer&lt;/em&gt; (default=10)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;sp&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Connection sparsity of neurons in &lt;em&gt;recurrent pool&lt;/em&gt; (default=0.25)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;spIn&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Connection sparsity of neurons in &lt;em&gt;input layer&lt;/em&gt; (default=0.05)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;X&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Time lag in task of &lt;em&gt;decoder&lt;/em&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;We built a decoder (a neural network with 2 hidden layers) to decode firing rates into the original WM-model input. The capacity of the WM-model is determined by the performance of the decoder, which was denoted by the &lt;strong&gt;correlation&lt;/strong&gt; between real and decoded input.&lt;/p&gt;
+&lt;p&gt;We investigated the effects of each parameter as well as its interactions on the WM capacity, then also optimized the WM model for its maximal performance. For each parameter, the change of performance of the decoder while increasing its value and keeping others fixed indicates its role in forming WM of RNN. These findings encourage better understanding of human’s brain.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;gIn&#34; srcset=&#34;
+               /project/working-memory-capacity-of-rnn/gIn_hu_3d4e5019228da4ae.webp 400w,
+               /project/working-memory-capacity-of-rnn/gIn_hu_c4b3063c34ede676.webp 760w,
+               /project/working-memory-capacity-of-rnn/gIn_hu_e05fa6bff3a7b949.webp 1200w&#34;
+               src=&#34;http://localhost:1313/project/working-memory-capacity-of-rnn/gIn_hu_3d4e5019228da4ae.webp&#34;
+               width=&#34;596&#34;
+               height=&#34;386&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;N&#34; srcset=&#34;
+               /project/working-memory-capacity-of-rnn/N_hu_4743617f931358a8.webp 400w,
+               /project/working-memory-capacity-of-rnn/N_hu_41acf332ec6baaff.webp 760w,
+               /project/working-memory-capacity-of-rnn/N_hu_4aea0fac8ddb641f.webp 1200w&#34;
+               src=&#34;http://localhost:1313/project/working-memory-capacity-of-rnn/N_hu_4743617f931358a8.webp&#34;
+               width=&#34;496&#34;
+               height=&#34;392&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;As a results, in a limited range of values, there are relatively significantly positive correlations between the number of neurons (&lt;code&gt;N&lt;/code&gt;), the gain of the input layer (&lt;code&gt;gIn&lt;/code&gt;), and the WM capacity of RNN, while the gain of recurrent layer (&lt;code&gt;g&lt;/code&gt;) and sparsity in both two layers (&lt;code&gt;sp&lt;/code&gt; &amp;amp; &lt;code&gt;spIn&lt;/code&gt;) have no significant correlation with WM capacity.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://drive.google.com/file/d/1SSVCdSo_x2_bkMs493W0wSXFWl49VYjP/view?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Example Code (Colab)&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>PyTorch</title>
-      <link>http://localhost:1313/project/pytorch/</link>
-      <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/pytorch/</guid>
-      <description>&lt;p&gt;PyTorch is a Python package that provides tensor computation (like NumPy) with strong GPU acceleration.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>scikit-learn</title>
-      <link>http://localhost:1313/project/scikit/</link>
-      <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/scikit/</guid>
-      <description>&lt;p&gt;scikit-learn is a Python module for machine learning built on top of SciPy and is distributed under the 3-Clause BSD license.&lt;/p&gt;</description>
+      <title>PoetryChat</title>
+      <link>http://localhost:1313/project/poetrychat/</link>
+      <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/project/poetrychat/</guid>
+      <description></description>
     </item>
     
   </channel>
