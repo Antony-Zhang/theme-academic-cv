@@ -21,10 +21,10 @@ author_notes:
   - 'Equal contribution'
 
 date: '2024-10-04T00:00:00Z'
-doi: ''
+doi: '10.1109/SWC62898.2024.00034'
 
 # Schedule page publish date (NOT publication's date).
-publishDate: '2017-01-01T00:00:00Z'
+publishDate: '2024-03-24T00:00:00Z'
 
 # Publication type.
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
@@ -32,8 +32,8 @@ publishDate: '2017-01-01T00:00:00Z'
 publication_types: ['paper-conference'] # article
 
 # Publication name and optional abbreviated publication name.
-publication: In *2024 IEEE Smart World Congress*
-publication_short: In *2024 SWC*
+publication: In *2024 IEEE Smart World Congress* (SWC)
+publication_short: In *2024 IEEE SWC*
 
 abstract: Generating Chinese poetry is a complex task with significant potential for large models. However, most current systems only support single-model of input and the output lacks interpretability. This paper proposes a large model based system that supports cross-modal input of text and image, provides interpretable annotations for generated Chinese poems, and sup- ports multiple rounds of iterative optimization. First, it analyzes images with CLIP and MiniGPT-4 and generates descriptive text from analysis with ERNIE-4.0. Then, it generates Chinese ancient poems from the input text and descriptive text by ERNIE-4.0, using our devised prompts based on CRISPE. Finally, it evaluates and then optimizes the created poems with prompts based on few-shot. Preliminary evaluations have validated the efficacy of our poetry scoring criteria and demonstrated the superior performance of the system when utilizing the conjunction of text and imagery as cross-modal inputs.
 
